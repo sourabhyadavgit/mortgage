@@ -8,7 +8,7 @@ from kafka import KafkaProducer
 DIP_Completed_TOPIC = "DIP_Details"
 consumer = KafkaConsumer(
     DIP_Completed_TOPIC,
-    bootstrap_servers="localhost:9092"
+    bootstrap_servers="192.168.1.112:9092"
 )
 print( " testing1")
 while True:

@@ -1,55 +1,59 @@
 import json
 import kafka
 import time
-import pymongo
+#import pymongo
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
-nam = input("Enter name: ")
-typ = input("Enter type of mortgage: ")
-sal = input("Enter salary: ")
-postcode = input("Enter postcode: ")
+import socket
+import flask
+from flask import Flask,jsonify,render_template,request
 
-# convert into JSON:
-#y = json.dumps(Customer)
+app = Flask(__name__)
 
-# the result is a JSON string:
-#print(y) 
+@app.route("/")
+def home():
+    return "Under progress"
 
-DIP_Completed_TOPIC = "DIP_Details"
+@app.route("/input", methods = ["POST","GET"])
+def inputform():
+    #nam = input("Enter name: ")
+    #typ = input("Enter type of mortgage: ")
+    #sal = input("Enter salary: ")
+    #postcode = input("Enter postcode: ")
+    reqjson = request.get_json()
 
-ORDER_KAFKA_TOPIC = "Order_Details"
-ORDER_Limit = 4
+    nam = reqjson['name']
+    typ = reqjson['type']
+    sal = reqjson['salary']
+    postcode = reqjson['postcode']
 
-producer = KafkaProducer(bootstrap_servers="localhost:9092")
+    DIP_Completed_TOPIC = "DIP_Details"
 
-print( " to generate an order in 10 secs")
+    ORDER_KAFKA_TOPIC = "Order_Details"
+    ORDER_Limit = 4
 
-for i in range (1,ORDER_Limit):
-    data = {
-        "order_id" : i,
-        "user_id" : f"{nam}_{i}",
-        "salary"  : sal,
-        "items" : f"{typ}",
-        "postcode" : postcode
-    }
+    producer = KafkaProducer(bootstrap_servers="192.168.1.112:9092")
 
-    producer.send(
-        ORDER_KAFKA_TOPIC,
-        json.dumps(data).encode("utf-8")
-    )
-    print(f"done sending{i}")
-    producer.flush()
-    time.sleep(8)
-"""""
-consumer = KafkaConsumer(
-    DIP_Completed_TOPIC,
-    bootstrap_servers="localhost:9092"
-)
-print( " testing1")
-for message in consumer:
-        print("DIP notification")
-        consumed_msg = json.loads(message.value.decode("utf-8"))
-        Inc_val =  consumed_msg["Income"]
-        prop_val = consumed_msg["Property"]
-        print(f"DIP result for consumer {nam} is income validation is {Inc_val} and property validation is {prop_val} ..!! ")
-print( " testing2")"""
+    print( " to generate an order in 10 secs")
+
+    for i in range (1,ORDER_Limit):
+        data = {
+            "order_id" : i,
+            "user_id" : f"{nam}_{i}",
+            "salary"  : sal,
+            "items" : f"{typ}",
+            "postcode" : postcode
+        }
+
+        producer.send(
+            ORDER_KAFKA_TOPIC,
+            json.dumps(data).encode("utf-8")
+        )
+        print(f"done sending{i}")
+        producer.flush()
+    return "check dip status ms"
+        #time.sleep(8)
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)
+

@@ -10,12 +10,12 @@ ORDER_confirmed_TOPIC = "Order_confirmed"
 
 producer = KafkaProducer(
 #    ORDER_confirmed_TOPIC,
-    bootstrap_servers="localhost:9092"
+    bootstrap_servers="192.168.1.112:9092"
 )
 
 consumer = KafkaConsumer(
     ORDER_KAFKA_TOPIC,
-    bootstrap_servers="localhost:9092"
+    bootstrap_servers="192.168.1.112:9092"
 )
 
 
