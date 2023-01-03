@@ -1,3 +1,6 @@
+# run this code to generate some sample data into mongoDB
+# need to run this 3-4 times so that mongo has some data to query
+
 import json
 from json import dumps
 from kafka import KafkaProducer

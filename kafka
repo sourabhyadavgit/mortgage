@@ -29,5 +29,11 @@ Hello
 start mongodb
 
 goto docker compose folder and run docker-compose up
+C:\Users\saura\OneDrive\Desktop\Project\broker\Dockercompose
+
 #################
 
+Test curl command
+
+curl -i -H "Content-Type: application/json;charset=utf-8" -X POST -d "{\"name\":\"jack\",\"type\":\"home\",\"salary\":\"40\",\"postcode\":\"md22dy\"}" 127.0.0.1:5000/input
+C:\Users\saura>curl -i -H "Content-Type: application/json;charset=utf-8" -X POST -d "{\"name\":\"Sam\",\"type\":\"home\",\"salary\":\"40\",\"postcode\":\"md22dy\"}" 127.0.0.1:5000/input

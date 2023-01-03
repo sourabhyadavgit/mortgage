@@ -13,11 +13,11 @@ ORDER_confirmed_TOPIC = "Order_confirmed"
 
 producer = KafkaProducer(
 #    DIP_Completed_TOPIC ,
-    bootstrap_servers="localhost:9092")
+    bootstrap_servers="192.168.1.112:9092")
 
 consumer = KafkaConsumer(
     ORDER_confirmed_TOPIC,
-    bootstrap_servers="localhost:9092"
+    bootstrap_servers="192.168.1.112:9092"
 )
 
 
