@@ -19,14 +19,14 @@ consumer = KafkaConsumer(
 )
 
 
-print("starting to listen now")
+print("--Income Validation starting to listen now--")
 while True:
     for message in consumer:
-        print("ongoing validation")
+        print("------------Income Validation step for the Customer------------")
         consumed_msg = json.loads(message.value.decode("utf-8"))
         print(consumed_msg)
 
-        userid = consumed_msg["order_id"]
+        userid = consumed_msg["Customer_id"]
         email = consumed_msg["user_id"]
         postcode = consumed_msg["postcode"]
         sal = int(consumed_msg["salary"])
@@ -41,7 +41,7 @@ while True:
             "stat" : status,
             "postcode" : postcode
         }
-
+        print("----------------------------------------------------------------------------")
         producer.send(
             ORDER_confirmed_TOPIC,
             json.dumps(data).encode("utf-8")

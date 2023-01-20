@@ -21,14 +21,16 @@ consumer = KafkaConsumer(
 )
 
 
-print("starting to listen now")
+print("--Property Check MS starting to listen now--")
 while True:
     for message in consumer:
-        print("Sending notification")
+        print("------------Income Validation step for the Customer------------")
+
         consumed_msg = json.loads(message.value.decode("utf-8"))
         email = consumed_msg["email2"]
         status = consumed_msg["stat"]
         postcode = consumed_msg ["postcode"]
+        userid = consumed_msg["user"]
         
         my_client = pymongo.MongoClient("mongodb://rootsy:rootsy@localhost:27017")
         mydb = my_client["valh_data"]
@@ -43,6 +45,7 @@ while True:
         data = {
             "Income" : status,
             "Property" : result,
+            "userid": userid
         }
 
         producer.send(
@@ -50,6 +53,6 @@ while True:
             json.dumps(data).encode("utf-8")
         )
         producer.flush()
-        print(f"sent email to {email} and status is {status} and postcode is {postcode} and val hub result is {result}")
-
+        print(f"sent email to {email} and property status for {postcode} is {result} via val_hub")
+        print("----------------------------------------------------------------------------")
 

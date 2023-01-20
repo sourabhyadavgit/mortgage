@@ -15,7 +15,7 @@ my_client = pymongo.MongoClient("mongodb://rootsy:rootsy@localhost:27017")
 mydb = my_client["valh_data"]
 mycol = mydb["post_data"]
 
-mydict = {"address": "wa15", "Status": "Bad"}
+mydict = {"address": "BL22", "Status": "Failed"}
 
 mycol.insert_one(mydict)
 print("submitted a record into mongodb")

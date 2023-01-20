@@ -30,7 +30,7 @@ def inputform():
     DIP_Completed_TOPIC = "DIP_Details"
 
     ORDER_KAFKA_TOPIC = "Order_Details"
-    ORDER_Limit = 4
+    ORDER_Limit = 2
 
     producer = KafkaProducer(bootstrap_servers="192.168.1.112:9092")
 
@@ -38,21 +38,22 @@ def inputform():
 
     for i in range (1,ORDER_Limit):
         data = {
-            "order_id" : i,
+            "Customer_id" : i,
             "user_id" : f"{nam}_{i}",
             "salary"  : sal,
             "items" : f"{typ}",
             "postcode" : postcode
         }
-
+        time.sleep(2)
         producer.send(
             ORDER_KAFKA_TOPIC,
             json.dumps(data).encode("utf-8")
         )
         print(f"done sending{i}")
+
         producer.flush()
     return "check dip status ms"
-        #time.sleep(8)
+#        time.sleep(8)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
