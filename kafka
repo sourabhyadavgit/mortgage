@@ -37,3 +37,15 @@ Test curl command
 
 curl -i -H "Content-Type: application/json;charset=utf-8" -X POST -d "{\"name\":\"jack\",\"type\":\"home\",\"salary\":\"40\",\"postcode\":\"md22dy\"}" 127.0.0.1:5000/input
 C:\Users\saura>curl -i -H "Content-Type: application/json;charset=utf-8" -X POST -d "{\"name\":\"Sam\",\"type\":\"home\",\"salary\":\"40\",\"postcode\":\"md22dy\"}" 127.0.0.1:5000/input
+
+>curl -i -H "Content-Type: application/json;charset=utf-8" -X POST -d "{\"name\":\"Pete\",\"type\":\"home\",\"salary\":\"40\",\"postcode\":\"wa15\"}" 127.0.0.1:5000/input
+
+#################
+
+Steps to dockerize application
+docker build -t msapp .
+docker run -d -p 5000:5000 msapp
+
+####################
+c:/Users/saura/OneDrive/Desktop/Project/mortgage/E2EMS/e2e-env/Scripts/python.exe c:/Users/saura/OneDrive/Desktop/Project/mortgage/E2EMS/
+
