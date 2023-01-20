@@ -8,6 +8,8 @@ import bson
 from bson.json_util import dumps
 from bson import json_util
 
+
+
 DIP_Completed_TOPIC = "DIP_Details"
 ORDER_confirmed_TOPIC = "Order_confirmed"
 
@@ -47,10 +49,18 @@ while True:
             "Property" : result,
             "userid": userid
         }
-
+        data2 = {
+            "customer_id" : userid,
+            "state" : "at Property validation microservice "
+        }
+        Tracing_TOPIC = "trace_details"
         producer.send(
             DIP_Completed_TOPIC,
             json.dumps(data).encode("utf-8")
+        )
+        producer.send(
+            Tracing_TOPIC,
+            json.dumps(data2).encode("utf-8")
         )
         producer.flush()
         print(f"sent email to {email} and property status for {postcode} is {result} via val_hub")

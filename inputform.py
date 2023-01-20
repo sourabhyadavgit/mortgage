@@ -30,7 +30,7 @@ def inputform():
     DIP_Completed_TOPIC = "DIP_Details"
 
     ORDER_KAFKA_TOPIC = "Order_Details"
-    ORDER_Limit = 2
+    ORDER_Limit = 5
 
     producer = KafkaProducer(bootstrap_servers="192.168.1.112:9092")
 
