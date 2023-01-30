@@ -4,6 +4,12 @@ import time
 import pymongo
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
+import logging
+
+logging.basicConfig(
+         format='%(asctime)s %(levelname)-8s %(message)s',
+         level=logging.INFO,
+         datefmt='%Y-%m-%d %H:%M:%S')
 
 Tracing_TOPIC = "trace_details"
 consumer = KafkaConsumer(
@@ -20,5 +26,6 @@ while True:
         state = consumed_msg["state"]
         
         print("--------------------------------------------------------------------------------------------------------------------")
-        print(f"INFO: Tracelevel-4  at Customer_id {cust_id}  is  {state}..!! ")
+#        print(f"INFO: Tracelevel-4  at Customer_id {cust_id}  is  {state}..!! ")
+        logging.info(f"INFO: Tracelevel-4  at Customer_id {cust_id}  is  {state}..!! ")
 #print( " testing2")

@@ -30,11 +30,11 @@ def inputform():
     DIP_Completed_TOPIC = "DIP_Details"
 
     ORDER_KAFKA_TOPIC = "Order_Details"
-    ORDER_Limit = 5
+    ORDER_Limit = 40
 
     producer = KafkaProducer(bootstrap_servers="192.168.1.112:9092")
 
-    print( " to generate an order in 10 secs")
+    print( " to generate an customer details in 10 secs")
 
     for i in range (1,ORDER_Limit):
         data = {
